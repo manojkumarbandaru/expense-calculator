@@ -1,10 +1,19 @@
 import '../css/NewExpense.css';
 import ExpenseForm from "./ExpenseForm";
 
-const NewExpense = () => {
+const NewExpense = (props) => {
+    const saveExpenseDataHandler = (expenseDataSubmitted) => {
+        //two way data binding. this is for extracting the data submitted by child component ExpenseForm
+        const expenseData = {
+            ...expenseDataSubmitted,
+            id: Math.random().toString()
+        };
+        props.addNewExpense(expenseData);
+    }
+
     return (
         <div className="new-expense">
-            <ExpenseForm />
+            <ExpenseForm saveExpenseData={saveExpenseDataHandler} />
         </div>
     );
 };
